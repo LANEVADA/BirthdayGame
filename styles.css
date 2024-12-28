@@ -1,0 +1,165 @@
+body {
+    font-family: 'Comic Sans MS', cursive, sans-serif;
+    background-color: #ffe4e1;
+    text-align: center;
+}
+
+header {
+    background: #ff69b4;
+    color: white;
+    padding: 10px;
+}
+
+#game-board {
+    display: grid;
+    grid-template-columns: repeat(4, 100px);
+    gap: 10px;
+    justify-content: center;
+    margin: 20px auto;
+}
+
+/* Present Area */
+#present-area {
+    margin-top: 20px;
+    width: 100%;
+    height: 150px;
+    background-color: #ffe082;
+    border: 2px dashed #ffb300;
+    border-radius: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    overflow: hidden;
+    position: relative;
+}
+
+.present {
+    font-size: 2em;
+    animation: fall 1s ease-in-out forwards;
+    position: relative;
+}
+
+.letter-area {
+    font-size: 20px;
+    margin-top: 20px;
+    padding: 20px;
+    background-color: #f7f7f7;
+    border: 2px solid #ddd;
+    max-width: 600px;
+    margin: 20px auto;
+    display: none;
+}
+@keyframes fall {
+    from {
+        transform: translateY(-300px);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+/* Cards */
+.card {
+    width: 100px;
+    height: 100px;
+    background-color: #ffd54f;
+    border: 2px solid #ffca28;
+    border-radius: 10px;
+    cursor: pointer;
+    position: relative;
+    transition: opacity 0.5s, transform 0.3s ease;
+}
+
+.card span {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+    font-size: 2em;
+    font-weight: bold;
+    backface-visibility: hidden;
+    position: absolute;
+}
+
+.card .card-back {
+    background-color: #ffca28;
+}
+
+.card .card-front {
+    transform: rotateY(180deg);
+}
+
+.card.flipped .card-front {
+    transform: rotateY(0);
+}
+
+.card.flipped .card-back {
+    transform: rotateY(180deg);
+}
+
+/* Fading out matched cards */
+.card.matched {
+    opacity: 0;
+    visibility: hidden;
+    transform: scale(0.9);
+}
+.card {
+    width: 100px;
+    height: 100px;
+    background-color: #f0f8ff;
+    border-radius: 10px;
+    box-shadow: 2px 2px 5px #888888;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 24px;
+    color: transparent;
+    transition: transform 0.3s;
+}
+
+.card.flipped {
+    background-color: #ffe4b5;
+    color: #000;
+}
+
+/* Glow effect */
+.matched {
+    animation: glow 1s ease-in-out;
+}
+
+@keyframes glow {
+    0% {
+        box-shadow: 0 0 10px #ffd700, 0 0 20px #ff8c00;
+    }
+    50% {
+        box-shadow: 0 0 20px #ffd700, 0 0 40px #ff4500;
+    }
+    100% {
+        box-shadow: 0 0 10px #ffd700, 0 0 20px #ff8c00;
+    }
+}
+
+/* Confetti explosion */
+.confetti {
+    position: absolute;
+    width: 10px;
+    height: 10px;
+    background-color: var(--confetti-color, #ff69b4);
+    border-radius: 50%;
+    animation: explode 1s ease-out forwards;
+}
+
+@keyframes explode {
+    0% {
+        transform: translate(0, 0) scale(1);
+    }
+    100% {
+        transform: translate(calc(var(--x, 0) * 100px), calc(var(--y, 0) * -100px)) scale(0);
+        opacity: 0;
+    }
+}
